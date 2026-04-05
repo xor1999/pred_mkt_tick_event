@@ -1,6 +1,7 @@
 # === Project-specific ===
 # Downloaded data (large, regenerable)
-data/
+/data/
+/datasets/
 *.duckdb
 *.duckdb.wal
 
