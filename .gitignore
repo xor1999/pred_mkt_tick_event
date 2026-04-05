@@ -1,3 +1,14 @@
+# === Project-specific ===
+# Downloaded data (large, regenerable)
+data/
+*.duckdb
+*.duckdb.wal
+
+# Logs
+*.log
+
+# === Python standard ===
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

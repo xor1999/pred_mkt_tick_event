@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pred-mkt-tick-event"
+version = "0.1.0"
+description = "Prediction market lead-lag alpha around macro events"
+requires-python = ">=3.10"
+
+dependencies = [
+    # Data & storage
+    "pandas>=2.1",
+    "pyarrow>=14.0",
+    "duckdb>=1.0",
+
+    # HTTP & API clients
+    "requests>=2.31",
+    "urllib3>=2.0",
+
+    # Prediction market SDK
+    "telonex>=0.1",
+
+    # Configuration
+    "python-dotenv>=1.0",
+
+    # CLI
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+analysis = [
+    # Path signatures (lead-lag detection)
+    "esig>=1.0",
+    # Topological data analysis (regime detection)
+    "giotto-tda>=0.6",
+    # Statistical tests (Granger causality)
+    "statsmodels>=0.14",
+    # Numerics
+    "numpy>=1.24",
+    "scikit-learn>=1.3",
+]
+dev = [
+    "pytest>=7.4",
+    "ruff>=0.4",
+    "ipython>=8.0",
+    "jupyter>=1.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "config"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
