@@ -118,6 +118,20 @@ model-free way to detect when your signal is live vs. dead.
 | **EODHD** | Macro economic event calendar | Event-level | 1 credit/req |
 | **Telonex** | Polymarket on-chain fills | Fill-level | API key required |
 
+> **Note on Telonex API throughput:** Telonex serves fill data as one
+> Parquet file per market per day, with no bulk or batch endpoint.  For a
+> macro-filtered universe of ~3,600 markets over a 2-year window, this
+> translates to ~265k individual HTTP requests even though the total
+> payload compresses to a few hundred megabytes.  The SDK provides
+> concurrency within a single market (parallel day downloads), but each
+> `download()` call still blocks on its own async event loop, limiting
+> cross-market parallelism.  We mitigate this with `ThreadPoolExecutor`
+> (4 markets in parallel, each with 20 concurrent day-level fetches), but
+> a full ingestion still takes several hours where a single bulk query
+> would take seconds.  If Telonex adds a batch endpoint or date-range
+> downloads in the future, ingestion time would drop by 1--2 orders of
+> magnitude.
+
 > **Kalshi** (CFTC-regulated macro prediction market) has structured contracts
 > for Fed rates, CPI, GDP, unemployment, etc.  However, **Kalshi restricts API
 > access to US-based users only**.  The client and ingestion code are included
