@@ -1,0 +1,5 @@
+event_type,n_events,mean_signed_area,median_signed_area,pct_pm_leads,mean_xcorr_lag,mean_xcorr_r,mean_granger_lag,min_granger_pval
+CPI,15,0.1343,0.1153,1.0,-27.2,0.0525,1.0,0.5294
+NFP,10,0.2821,0.3827,0.8,1.8,-0.0004,6.6,0.0
+FOMC,25,0.0712,0.0568,0.72,-22.16,-0.0064,4.5,0.0
+GDP,100,0.0355,0.0457,0.6,-1.51,-0.0115,3.18,0.0
